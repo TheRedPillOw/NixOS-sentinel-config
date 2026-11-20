@@ -30,6 +30,10 @@
   # Use unl0kr for on screen keyboard disk encryption
   boot.initrd.unl0kr.enable = true;
   boot.initrd.unl0kr.allowVendorDrivers = true;
+  boot.initrd.unl0kr.settings = {
+  input.touchscreen = true;
+  general.backend = "drm";
+  };
 
   # btrfs check filesytem checksums weekly and repair
   services.btrfs.autoScrub = {

@@ -21,4 +21,11 @@
     	HostName *
     	IdentityFile ~/.ssh/id_ed25519
   '';
+  programs.git = {
+  enable = true;
+settings.user = {
+name = "TheRedPillOw";
+email = "TheRedPillOw@github.com";
+};
+  };
 }
