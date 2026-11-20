@@ -1,14 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   #enable Flakes and experimental commands
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -19,24 +21,29 @@
   #enable touchscreen support
   #microsoft-surface.ipts.enable = true;
   # enable Surface stuff
-  #microsoft-surface.surface-control.enable = true;
+  # config.microsoft-surface.surface-control.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Use unl0kr for on screen keyboard disk encryption
+  boot.initrd.unl0kr.enable = true;
+  boot.initrd.unl0kr.allowVendorDrivers = true;
+
   # btrfs check filesytem checksums weekly and repair
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
-    fileSystems = [ "/" ];
+    fileSystems = ["/"];
   };
 
   # Storage optimization (btrfs black magic)
   services.fstrim.enable = true;
 
   # Use latest kernel (don't use when surface-linux is enabled).
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  nix.settings.trusted-users = ["root" "trp0"];
 
   networking.hostName = "sentinel"; # Define your hostname.
 
@@ -61,17 +68,15 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-  
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "de";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
-programs.niri.enable = true;
-# programs.noctalia.enable = true;
-services.displayManager.sddm.enable = true;
-services.displayManager.sddm.wayland.enable = true;
-programs.nh.enable = true;
-services.netbird.enable = true;
+  programs.niri.enable = true;
+  # programs.noctalia.enable = true;
+  services.displayManager.noctalia-greeter.enable = true;
+  # services.displayManager.sddm.wayland.enable = true;
+  programs.nh.enable = true;
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -90,11 +95,10 @@ services.netbird.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.trp0 = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "networkmanager" "video" "audio" "storage" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "input" "networkmanager" "video" "audio" "storage"]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
   programs.fish.enable = true;
-
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -103,7 +107,7 @@ services.netbird.enable = true;
     wget
     curl
     git
-   ];
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -147,6 +151,4 @@ services.netbird.enable = true;
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "26.05"; # Did you read the comment?
-
 }
-
