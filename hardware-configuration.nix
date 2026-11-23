@@ -17,6 +17,9 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  boot.resumeDevice = "/dev/disk/by-uuid/833c40ba-d30a-4e24-91af-8fa5145d00a3";
+  boot.kernelParams = ["resume_offset=6497536"];
+
   fileSystems."/" = {
     device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
