@@ -6,6 +6,7 @@
     fuzzel
     alacritty
     rnote
+    wvkbd
     # vnote
   ];
   programs.noctalia.enable = true;
