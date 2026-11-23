@@ -35,6 +35,19 @@
   general.backend = "drm";
   };
 
+  # Kernel parameters
+  # mem_sleep_default is there for hibernation seen in power config
+  boot.kernelParams = ["mem_sleep_default=deep"];
+
+  #power configuration
+  services.power-profiles-daemon.enable = true;
+  services.logind.settings.Login.PowerKey = "suspend-then-hibernate";
+  services.logind.settings.Login.PowerKeyLongPress = "poweroff";
+  systemd.sleep.settings.Sleep = {
+    HibernateDelaySec = "30";
+    SuspendState = "mem";
+  };
+
   # btrfs check filesytem checksums weekly and repair
   services.btrfs.autoScrub = {
     enable = true;
