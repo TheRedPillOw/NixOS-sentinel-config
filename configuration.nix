@@ -10,6 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./niri.nix
   ];
 
   #enable Flakes and experimental commands
