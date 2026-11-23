@@ -131,6 +131,7 @@
     wget
     curl
     git
+    wvkbd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
