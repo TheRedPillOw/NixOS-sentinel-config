@@ -23,8 +23,10 @@
   # enable Surface stuff
   # config.microsoft-surface.surface-control.enable = true;
 
-  # Use the systemd-boot EFI boot loader.
+  # Use the limine boot loader.
   boot.loader.limine.enable = true;
+  # only keep 5 Generations
+  boot.loader.limine.maxGenerations = 5;
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Use unl0kr for on screen keyboard disk encryption
@@ -41,8 +43,8 @@
 
   #power configuration
   services.power-profiles-daemon.enable = true;
-  services.logind.settings.Login.PowerKey = "suspend-then-hibernate";
-  services.logind.settings.Login.PowerKeyLongPress = "poweroff";
+  services.logind.settings.Login.HandlePowerKey = "suspend-then-hibernate";
+  services.logind.settings.Login.HandlePowerKeyLongPress = "poweroff";
   systemd.sleep.settings.Sleep = {
     HibernateDelaySec = "30s";
     SuspendState = "mem";
@@ -94,6 +96,10 @@
   services.displayManager.noctalia-greeter.enable = true;
   # services.displayManager.sddm.wayland.enable = true;
   programs.nh.enable = true;
+  programs.nh.clean = {
+    enable = true;
+    extraArgs = "--keep 5";
+  };
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
