@@ -132,7 +132,7 @@
     curl
     git
     wvkbd
-    aria2c
+    aria2
     zip
     unzip
     nixfmt
