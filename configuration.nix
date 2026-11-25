@@ -136,6 +136,10 @@
     zip
     unzip
     nixfmt
+    nautilus
+    nixd
+    typst
+    tinymist
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
