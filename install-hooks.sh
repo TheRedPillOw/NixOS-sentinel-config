@@ -11,6 +11,8 @@ if nix flake check . ; then
 else
 	echo "Feeeeeehler"
 fi
+
+git diff --cached --name-only -- '**.nix' | xargs -r nixfmt
 EOF
 	chmod +x pre-commit
 

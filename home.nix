@@ -12,7 +12,10 @@
     # vnote
   ];
   programs.noctalia.enable = true;
-  programs.helix.enable = true;
+  programs.helix = {
+    enable = true;
+    package = pkgs.evil-helix;
+  };
   programs.yazi.enable = true;
   programs.qutebrowser.enable = true;
   home.stateVersion = "26.05";
