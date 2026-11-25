@@ -6,6 +6,8 @@
     fuzzel
     alacritty
     rnote
+    typesetter
+    yazzi
     # vnote
   ];
   programs.noctalia.enable = true;
