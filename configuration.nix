@@ -6,7 +6,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -14,7 +15,10 @@
   ];
 
   #enable Flakes and experimental commands
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # enable surface-linux kernel
   #hardware.microsoft-surface.kernelVersion = "stable";
@@ -34,13 +38,13 @@
   boot.initrd.unl0kr.enable = true;
   boot.initrd.unl0kr.allowVendorDrivers = true;
   boot.initrd.unl0kr.settings = {
-  input.touchscreen = true;
-  general.backend = "drm";
+    input.touchscreen = true;
+    general.backend = "drm";
   };
 
   # Kernel parameters
   # mem_sleep_default is there for hibernation seen in power config
-  boot.kernelParams = ["mem_sleep_default=s2idle"];
+  boot.kernelParams = [ "mem_sleep_default=s2idle" ];
 
   #power configuration
   services.power-profiles-daemon.enable = true;
@@ -55,7 +59,7 @@
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
-    fileSystems = ["/"];
+    fileSystems = [ "/" ];
   };
 
   # Storage optimization (btrfs black magic)
@@ -63,7 +67,10 @@
 
   # Use latest kernel (don't use when surface-linux is enabled).
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  nix.settings.trusted-users = ["root" "trp0"];
+  nix.settings.trusted-users = [
+    "root"
+    "trp0"
+  ];
 
   networking.hostName = "sentinel"; # Define your hostname.
 
@@ -119,7 +126,14 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.trp0 = {
     isNormalUser = true;
-    extraGroups = ["wheel" "input" "networkmanager" "video" "audio" "storage"]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "input"
+      "networkmanager"
+      "video"
+      "audio"
+      "storage"
+    ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
   programs.fish.enable = true;

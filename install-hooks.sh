@@ -12,7 +12,9 @@ else
 	echo "Feeeeeehler"
 fi
 
-git diff --cached --name-only -- '**.nix' | xargs -r nixfmt
+files=$(git diff --cached --name-only -- '**.nix')
+nixfmt $files
+git add $files
 EOF
 	chmod +x pre-commit
 
