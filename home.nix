@@ -7,11 +7,13 @@
     alacritty
     rnote
     typesetter
-    yazzi
+    signal-desktop
+    fend
     # vnote
   ];
   programs.noctalia.enable = true;
   programs.helix.enable = true;
+  programs.yazi.enable = true;
   programs.qutebrowser.enable = true;
   home.stateVersion = "26.05";
   programs.ssh.extraConfig = ''
