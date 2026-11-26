@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     broot
     btop
@@ -9,6 +9,7 @@
     typesetter
     signal-desktop
     fend
+    claws-mail
     # vnote
   ];
   programs.noctalia.enable = true;
@@ -29,10 +30,10 @@
     	IdentityFile ~/.ssh/id_ed25519
   '';
   programs.git = {
-  enable = true;
-settings.user = {
-name = "TheRedPillOw";
-email = "TheRedPillOw@github.com";
-};
+    enable = true;
+    settings.user = {
+      name = "TheRedPillOw";
+      email = "TheRedPillOw@github.com";
+    };
   };
 }
